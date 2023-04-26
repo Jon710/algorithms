@@ -1,0 +1,27 @@
+There are 2 ways of representing a graph: adjacency matrix and adjacency list:
+
+Matrix
+The problem with an adjacency matrix is it requires a lot of memory. We need (nˆ2) space, because there are n nodes. For most graphs (sparse) it's too much because there aren't many nodes that are connected.
+However, lookup is very fast.
+
+List
+We can use maps and it's space efficient because we don't waste empty spaces if there are no connections between nodes.
+However, lookup is slower because we keep a list of nodes. Sort of like a linked list.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Graph traversals (* keep a visited set so that it doesn't go on forever)
+
+BFS (use cases: finding shortest path)
+We check all neighbors of a starting node and them to a queue. Then, check all neighbors of the next node and so on.
+
+DFS 
+We go as deep as we can, not layer by layer. For this, we need a stack.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Complexity (adj list)
+add node - O(1)
+add edge - O(1)
+remove node - O(n + e) because we first need to remove the node and its edges, then check every other node if they are connected
+remove edge - O(e) 
+
+TIPS:
+if problem states something about being adjacent or moving in 4 directions (exploring grid), often times it allows to make use of graph traversal algorithms.
+on the other hand, if problem involves optimization (such as maximum path) or if we already know everything about the grid. 
