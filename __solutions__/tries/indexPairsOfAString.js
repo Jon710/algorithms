@@ -33,8 +33,8 @@ class Trie {
 
 var indexPairs = function (text, words) {
   const output = [];
+  const trie = new Trie();
 
-  let trie = new Trie();
   for (let word of words) trie.insert(word);
 
   //iterate through text

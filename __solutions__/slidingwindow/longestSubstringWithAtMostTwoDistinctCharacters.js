@@ -1,7 +1,7 @@
 var lengthOfLongestSubstringTwoDistinct = function (s) {
   let longest = 0;
   let windowStart = 0;
-  let map = new Map();
+  const map = new Map();
 
   for (let windowEnd = 0; windowEnd < s.length; windowEnd++) {
     map.set(s[windowEnd], (map.get(s[windowEnd]) || 0) + 1);
