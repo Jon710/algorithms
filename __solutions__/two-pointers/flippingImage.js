@@ -34,7 +34,7 @@ var flipAndInvertImage = function (image) {
       image[i][k--] = temp;
     }
 
-  for (j = 0; j < image[i].length; j++) {
+    for (j = 0; j < image[i].length; j++) {
       image[i][j] = image[i][j] === 1 ? 0 : 1;
     }
   }

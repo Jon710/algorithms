@@ -17,6 +17,7 @@ class MyCalendar {
   book(start, end) {
     let left = 0;
     let right = this.calendar.length - 1;
+
     while (left <= right) {
       const mid = left + Math.floor((right - left) / 2);
       if (start < this.calendar[mid][1] && this.calendar[mid][0] < end)
@@ -28,8 +29,11 @@ class MyCalendar {
         right = mid - 1;
       }
     }
+
     this.calendar.push([start, end]);
+
     this.calendar.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+
     return true;
   }
 }
