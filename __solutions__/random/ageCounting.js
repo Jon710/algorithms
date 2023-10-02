@@ -8,37 +8,54 @@
 // Finally, then output the SHA1 hash of the file.
 const https = require("https");
 const fs = require("fs");
-let crypto = require("crypto");
-const path = "output.txt";
+const crypto = require("crypto");
 
-https.get("https://coderbyte.com/api/challenges/json/age-counting", (resp) => {
-  let data = "";
-  const writeStream = fs.createWriteStream(path);
+https
+  .get("https://coderbyte.com/api/challenges/json/age-counting", (res) => {
+    let data = "";
 
-  writeStream.on("finish", () => {
-    let hash = crypto.createHash("sha1");
-    const readStream = fs.createReadStream(path);
+    res.on("data", (chunk) => {
+      data += chunk;
+    });
 
-    readStream.on("data", (chunk) => hash.update(chunk));
-    readStream.on("end", () => console.log(hash.digest("hex")));
-  });
+    res.on("end", () => {
+      // Parse the JSON response
+      const response = JSON.parse(data);
 
-  resp.on("data", (chunk) => {
-    data += chunk;
-  });
+      // Count the items with age equal to 32
+      const items = response.data.split(", ");
+      let count = 0;
+      const outputLines = [];
 
-  resp.on("end", () => {
-    data = JSON.parse(data);
-    let counter = 0;
-    const keys = data.data.split(", ");
-    // console.log(keys);
+      for (const item of items) {
+        const [key, age] = item.split("=");
 
-    for (let item of keys) {
-      writeStream.write(item + "\n");
-      if (item === "age=32") {
-        counter++;
+        if (age === "32") {
+          count++;
+          outputLines.push(key);
+        }
       }
-    }
-    writeStream.end();
+
+      // Write key values to output.txt
+      const outputStream = fs.createWriteStream("output.txt");
+
+      outputStream.write(outputLines.join("\n"));
+      outputStream.write("\n");
+      outputStream.end();
+
+      outputStream.on("finish", () => {
+        // Calculate SHA1 hash of the file
+        const hash = crypto.createHash("sha1");
+        const fileData = fs.readFileSync("output.txt");
+
+        hash.update(fileData);
+        const sha1Hash = hash.digest("hex");
+
+        console.log("Count:", count);
+        console.log("SHA1 Hash:", sha1Hash);
+      });
+    });
+  })
+  .on("error", (err) => {
+    console.error("Error:", err.message);
   });
-});
