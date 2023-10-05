@@ -12,7 +12,7 @@ var fixedPoint = function (arr) {
 
     if (arr[mid] === mid) {
       idx = mid;
-      right = mid - 1; // keep going, because there may be smaller elements
+      right = mid - 1; // keep going because there may be smaller elements
     } else if (arr[mid] > mid) {
       right = mid - 1;
     } else {
