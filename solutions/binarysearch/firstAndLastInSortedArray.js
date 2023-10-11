@@ -45,3 +45,5 @@ var searchRange = function (nums, target) {
     return lastIndex;
   }
 };
+
+console.log(searchRange([2, 4, 6, 8, 8, 11, 13], 8));
