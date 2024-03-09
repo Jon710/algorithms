@@ -4,7 +4,7 @@
  */
 var countPalindromicSubsequence = function (s) {
   const set = new Set();
-  let res = 0;
+  let ans = 0;
 
   for (let i = 0; i < s.length; i++) {
     if (set.has(s[i])) continue;
@@ -14,14 +14,19 @@ var countPalindromicSubsequence = function (s) {
     set.add(s[i]);
 
     let lastIndex = s.lastIndexOf(s[i]);
-    
+
     if (lastIndex !== i) {
       for (let j = i + 1; j < lastIndex; j++) {
         temp.add(s[j]);
       }
-      res += temp.size;
+
+      ans += temp.size;
     }
   }
 
-  return res;
+  return ans;
 };
+
+console.log(countPalindromicSubsequence("aabca"));
+console.log(countPalindromicSubsequence("adc"));
+console.log(countPalindromicSubsequence("bbcbaba"));
