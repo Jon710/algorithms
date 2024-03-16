@@ -1,4 +1,6 @@
 // BFS uses queues
+const { createTreeFromArray } = require("../../helpers");
+
 // O(n) time and space
 var levelOrder = function (root) {
   if (!root) return [];
@@ -11,11 +13,15 @@ var levelOrder = function (root) {
     result.push(queue.map((node) => node.val));
 
     while (size--) {
-      let node = queue.shift();
-      if (node.left) queue.push(node.left);
-      if (node.right) queue.push(node.right);
+      const currentNode = queue.shift();
+      if (currentNode.left) queue.push(currentNode.left);
+      if (currentNode.right) queue.push(currentNode.right);
     }
   }
 
   return result;
 };
+
+let arr = [3, 9, 20, null, null, 15, 7];
+let root = createTreeFromArray(arr);
+console.log(levelOrder(root));
