@@ -22,6 +22,6 @@ var levelOrder = function (root) {
   return result;
 };
 
-let arr = [3, 9, 20, null, null, 15, 7];
-let root = createTreeFromArray(arr);
+const arr = [3, 9, 20, null, null, 15, 7];
+const root = createTreeFromArray(arr);
 console.log(levelOrder(root));
