@@ -21,3 +21,20 @@ var topKFrequent = function (nums, k) {
 
   return ans;
 };
+
+var topKFrequent2 = function (nums, k) {
+  const map = new Map();
+
+  for (let num of nums) {
+    map.set(num, (map.get(num) || 0) + 1);
+  }
+
+  const keys = [...map.keys()];
+
+  keys.sort((a, b) => map.get(b) - map.get(a));
+
+  return keys.slice(0, k);
+};
+
+console.log(topKFrequent([3, 1, 1, 1, 2, 2], 2)); // [1, 2]
+console.log(topKFrequent2([3, 1, 1, 1, 2, 2], 2)); // [1, 2]

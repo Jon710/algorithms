@@ -39,4 +39,26 @@ var groupAnagrams = function (strs) {
 //   return [...map.values()];
 // };
 
-console.log(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]));
+// latest. same as the first one
+var groupAnagrams3 = function (strs) {
+  const map = new Map();
+
+  for (const str of strs) {
+    const currentStr = str.split("").sort((a, b) => a.localeCompare(b));
+    const sortedStr = currentStr.join("");
+
+    if (map.has(sortedStr)) {
+      const strsArr = map.get(sortedStr);
+      strsArr.push(str);
+      map.set(sortedStr, strsArr);
+    } else {
+      const strsArr = [];
+      strsArr.push(str);
+      map.set(sortedStr, strsArr);
+    }
+  }
+
+  return Array.from(map.values());
+};
+
+console.log(groupAnagrams3(["eat", "tea", "tan", "ate", "nat", "bat"]));
