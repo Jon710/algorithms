@@ -2,14 +2,13 @@
 var findAnagrams = function (s, p) {
   const result = [];
   const map = new Map();
+  let left = 0;
+  let right = 0;
   let charCount = p.length;
 
   for (let i = 0; i < p.length; i++) {
     map.set(p[i], map.get(p[i]) + 1 || 1);
   }
-
-  let left = 0,
-    right = 0;
 
   while (right < s.length) {
     // If we find a match and the map still has values for this character, we decrement the anagram charCount - we are one step closer to an anagram
@@ -36,3 +35,5 @@ var findAnagrams = function (s, p) {
 
   return result;
 };
+
+console.log(findAnagrams("cbaebabacd", "abc")); // [0, 6]

@@ -21,3 +21,5 @@ var lengthOfLongestSubstring = function (s) {
 
   return longestSubstring;
 };
+
+console.log(lengthOfLongestSubstring("abcabcbb")); // 3
