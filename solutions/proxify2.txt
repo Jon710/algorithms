@@ -1,0 +1,53 @@
+IN JS: Implement Readable and Transform streams processing data using the core stream package. 
+Requirements
+1. createReadableStream fn accepts a non-empty string and should return an instance of ReadableStream. When the fn is invoked, a chunk of data should be pushed to the created stream. Each chunk is a subsequent character of a string that was received as parameter. Inside the fn, attach listeners to the stream as follows:
+- when the stream receives a new character that was not pushed before, call the signal method with two parameters: the received string and the received character (converted to a string):
+signal('received', <received character>)
+- when the stream receives a new character that was already pushed before, call the signal method with two parameters: the duplicate string and the received character (converted to a string):
+signal('duplicate', <received character>)
+2. createTransformStream fn accepts no parameters and should return an instance of TransformStream. Assume that the stream receives a chunk of data that is a buffer of characters. For each chunk received:
+- if the chunk contains a buffer with an alphabetic character, it should convert it into uppercase. Call the signal method with the string transform and the converted character (a string). Push the converted character to the readable part of the stream:
+signal('transform', <uppercased character>)
+- if the chunk contains a non-alphabetic character, it should ignore it. Call the signal method with the string invalid and the received character (a string). It should not push the character to the readable part of the Transform stream:
+signal('invalid', <received character>)
+3. createStreamablePipeline fn accepts one string parameter. It should call createReadableStream (with the parameter passed to createStreamablePipeline) and createTransformStream and pipe them together. The fn should return an object:
+{
+    readableStream: ReadableStream, // created readable stream
+    transformStream: TransformStream, // created transform stream
+}
+
+HINTS:
+- dont close/end the streams that are created in the functions. they should remain active until they are cancelled/ended/errored explicitly.
+- dont set the encoding for the Readable stream
+- assume that both Readable and Transform streams receive only single characters
+
+EXAMPLE:
+
+const readable = createReadableStream('AbC');
+readable.push('d');
+readable.push('a');
+readable.push('A');
+
+// calls in order
+// signal('received', 'A')
+// signal('received', 'b')
+// signal('received', 'C')
+// signal('received', 'd')
+// signal('received', 'a')
+// signal('duplicate', 'A')
+
+const { readableStream, transformStream } = createPipeline('abc');
+readableStream.push('a');
+readableStream.push('1');
+
+// calls
+// signal('received', 'a')
+// signal('transform', 'A')
+// signal('received', 'b')
+// signal('transform', 'B')
+// signal('received', 'c')
+// signal('transform', 'C')
+// signal('duplicate', 'a')
+// signal('transform', 'A')
+// signal('received', '1')
+// signal('invalid', '1')
