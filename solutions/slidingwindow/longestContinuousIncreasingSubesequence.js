@@ -19,4 +19,3 @@ var findLengthOfLCIS = function (nums) {
 };
 
 console.log(findLengthOfLCIS([1, 3, 5, 4, 7]));
-console.log(findLengthOfLCIS([1, 3, 5, 6, 7]));

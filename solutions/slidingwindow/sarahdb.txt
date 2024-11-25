@@ -1,0 +1,15 @@
+References: Database Internals, jyotinder substack
+
+- WAL
+- compaction
+- bloom filters: https://samwho.dev/bloom-filters/
+
+https://chat.openai.com/share/545206c9-28b9-4a52-93a0-853b576f3bec
+http://firefly.kim/blog/Build-LSM-in-one-week/
+https://ewanvalentine.io/blog/advice-for-new-go-programmers
+https://jyotinder.substack.com/p/understanding-durability-using-write-ahead-logs?utm_source=profile&utm_medium=reader2
+https://jyotinder.substack.com/p/building-a-write-optimized-database?utm_source=profile&utm_medium=reader2 LSM 1
+https://jyotinder.substack.com/p/building-a-write-optimized-database-part-2?utm_source=profile&utm_medium=reader2 LSM 2
+https://jyotinder.substack.com/p/building-a-write-optimized-database-part-3?utm_source=profile&utm_medium=reader2 LSM 3
+https://jyotinder.substack.com/p/building-a-write-optimized-database-part-4?utm_source=profile&utm_medium=reader2 LSM 4
+https://jyotinder.substack.com/p/building-a-write-optimized-database-part-5?utm_source=profile&utm_medium=reader2 LSM 5
