@@ -21,7 +21,6 @@ var isPalindrome = function (head) {
   return true;
 };
 
-// --------------------------=------------------------------------------------------------------------------------------
 // o(n) time and o(1) space
 function reverse(head) {
   let prev = null;
